@@ -1,0 +1,46 @@
+steps:
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy web
+  args:
+  - 'apply'
+  - '-f'
+  - 'web/web-hello-deployment.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy service
+  args:
+  - 'apply'
+  - '-f'
+  - 'web/web-service-deployment.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy Kube Web
+  args:
+  - 'apply'
+  - '-f'
+  - 'web/web-kube-deployment.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy Kube Service
+  args:
+  - 'apply'
+  - '-f'
+  - 'web/kube-service-deployment.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy  Cloud Native LoadBalancer
+  args:
+  - 'apply'
+  - '-f'
+  - 'web/ingress-deployment.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
