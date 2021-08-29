@@ -1,7 +1,13 @@
 #  Give Cloud Build permissions to deploy to GKE 
 
+# Assign Cloud Build's service account permissions to deploy to GKE ("Kubernetes Engine Developer" role)
 
-# Assign Cloud Build's service account permissions to deploy to GKE ("container developer" role)
+variable "project_number" {
+  type        = string
+  description = "the project number"
+  default     = ""
+}
+
 resource "google_project_iam_binding" "cloud-build-iam-binding" {
   project = var.project_id
   role    = "roles/container.developer"

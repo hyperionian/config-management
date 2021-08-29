@@ -14,24 +14,33 @@
  * limitations under the License.
  */
 
-variable "project_id" {
+
+variable "sync_repo" {
   type        = string
-  description = "the GCP project where the cluster will be created"
+  description = "git URL for the repo which will be sync'ed into the cluster via Config Management"
+  default     = ""
 }
 
-variable "region" {
+variable "sync_branch" {
   type        = string
-  description = "the GCP region where the platform cluster will be created"
-  default     = "us-central1"
+  description = "the git branch in the repo to sync"
+  default     = ""
 }
 
-variable "zone" {
+variable "policy_dir" {
   type        = string
-  description = "the GCP zone in the region where the platform admin cluster will be created"
-  default     = "us-central1-f"
+  description = "the root directory in the repo branch that contains the resources."
+  default     = ""
 }
 
-variable "gke_num_nodes" {
-  default     = 4
-  description = "number of gke nodes"
+variable "resource_link" {
+  type = string
+  description = "the cluster resource id"
+  default = ""
+}
+
+variable "membership_id" {
+  type = string
+  description = "the cluster resource id"
+  default = ""
 }

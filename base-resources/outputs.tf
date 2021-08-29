@@ -23,3 +23,7 @@ output "kubernetes_platform_cluster_id" {
   description = "GKE Platform Admin Cluster ID"
 }
 
+output "kubernetes_dev_cluster_id" {
+  value       = google_container_cluster.dev.id
+  description = "GKE Platform Dev Cluster ID"
+}

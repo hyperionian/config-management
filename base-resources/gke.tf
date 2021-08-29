@@ -1,4 +1,3 @@
-# Source: https://github.com/hashicorp/learn-terraform-provision-gke-cluster/
 # https://learn.hashicorp.com/tutorials/terraform/gke 
 
 #3-node admin cluster
@@ -7,7 +6,27 @@
 #  description = "number of gke nodes"
 #}
 
-# Config Connector, etc. 
+module "enabled_google_apis" {
+  source  = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "~> 10.0"
+
+  project_id                  = var.project_id
+  disable_services_on_destroy = false
+
+  activate_apis = [
+    "compute.googleapis.com",
+    "container.googleapis.com",
+    "gkehub.googleapis.com",
+    "anthosconfigmanagement.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "cloudbuild.googleapis.com",
+    "secretmanager.googleapis.com",
+    "storage.googleapis.com"
+  ]
+}
+
+# Deploy 2 GKE clusters 
+
 resource "google_container_cluster" "platform" {
   project = var.project_id 
   provider = google-beta
@@ -68,7 +87,7 @@ resource "google_container_node_pool" "platform-nodes" {
   }
 }
 
-# 💻 DEVELOPMENT CLUSTER 
+# DEVELOPMENT CLUSTER 
 resource "google_container_cluster" "dev" {
   project = var.project_id 
   name     = "my-dev"
@@ -113,4 +132,40 @@ resource "google_container_node_pool" "dev-nodes" {
       disable-legacy-endpoints = "true"
     }
   }
+}
+
+# Enable Config Management feature
+
+resource "google_gke_hub_feature" "configmanagement_acm_feature" {
+  name     = "configmanagement"
+  location = "global"
+  provider = google-beta
+}
+
+# Set up GKE clusters for Config Management
+
+module "gkeacm" {
+  source  = "./acm-gke"
+  membership_id = "gkeacm-${google_container_cluster.platform.name}"
+  sync_repo = "https://github.com/hyperionian/config-management"
+  sync_branch = "main"
+  policy_dir = "config-root"
+  resource_link = "//container.googleapis.com/${google_container_cluster.platform.id}"
+
+  depends_on = [
+    google_gke_hub_feature.configmanagement_acm_feature
+  ]
+}
+
+module "gkeacm_dev" {
+  source  = "./acm-gke"
+  membership_id = "gkeacm-${google_container_cluster.dev.name}"
+  sync_repo = "https://github.com/hyperionian/config-management"
+  sync_branch = "main"
+  policy_dir = "config-root"
+  resource_link = "//container.googleapis.com/${google_container_cluster.dev.id}"
+
+  depends_on = [
+    google_gke_hub_feature.configmanagement_acm_feature
+  ]
 }
