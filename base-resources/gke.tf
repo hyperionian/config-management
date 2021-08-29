@@ -1,5 +1,7 @@
 # https://learn.hashicorp.com/tutorials/terraform/gke 
 
+# Enable Google APIs
+
 module "enabled_google_apis" {
   source  = "terraform-google-modules/project-factory/google//modules/project_services"
   version = "~> 10.0"
