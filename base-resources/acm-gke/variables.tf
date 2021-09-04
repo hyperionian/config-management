@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 variable "sync_repo" {
   type        = string
   description = "git URL for the repo which will be sync'ed into the cluster via Config Management"
