@@ -4,7 +4,7 @@ steps:
   args:
   - 'apply'
   - '-f'
-  - 'web/web-hello-deployment.yaml'
+  - 'app-deployment/web/web-hello-deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
@@ -13,7 +13,7 @@ steps:
   args:
   - 'apply'
   - '-f'
-  - 'web/web-service-deployment.yaml'
+  - 'app-deployment/web/web-service-deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
@@ -22,7 +22,7 @@ steps:
   args:
   - 'apply'
   - '-f'
-  - 'web/web-kube-deployment.yaml'
+  - 'app-deployment/web/web-kube-deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
@@ -31,7 +31,7 @@ steps:
   args:
   - 'apply'
   - '-f'
-  - 'web/kube-service-deployment.yaml'
+  - 'app-deployment/web/kube-service-deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
@@ -40,7 +40,7 @@ steps:
   args:
   - 'apply'
   - '-f'
-  - 'web/ingress-deployment.yaml'
+  - 'app-deployment/web/ingress-deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev'
