@@ -3,11 +3,8 @@ kind: ConfigMap
 metadata:
   namespace: wp
   name: wp-config
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev
 data:
-  ### We're using a ConfigMap for simplicity, but in real life one should
-  ### use a secret manager or other best practice for this database password.
+  ### use a secret manager or other best practice for this database password in real world scenario!!!
   MYSQL_ROOT_PASSWORD: "wp_user"
 ---
 apiVersion: v1
@@ -15,8 +12,6 @@ kind: Service
 metadata:
   namespace: wp
   name: wordpress-mysql
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev  
   labels:
     app: wordpress    
 spec:
@@ -32,8 +27,6 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: wp
   name: mysql-pvc
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev  
   labels:
     app: wordpress
 spec:
@@ -48,8 +41,6 @@ kind: Deployment
 metadata:
   namespace: wp
   name: wordpress-mysql
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev 
   labels:
     app: wordpress
 spec:
@@ -90,8 +81,6 @@ kind: Service
 metadata:
   namespace: wp
   name: wordpress
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev 
   labels:
     app: wordpress
 spec:
@@ -106,8 +95,6 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: wp
   name: wp-pvc
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev 
   labels:
     app: wordpress
 spec:
@@ -122,8 +109,6 @@ kind: Deployment
 metadata:
   namespace: wp
   name: wordpress
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev 
   labels:
     app: wordpress
 spec:
