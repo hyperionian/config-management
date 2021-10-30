@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: hello-world-deployment
   namespace: wp
-  annotations:
-    configmanagement.gke.io/cluster-selector: selector-env-dev
 spec:
   selector:
     matchLabels:
