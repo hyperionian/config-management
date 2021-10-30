@@ -3,7 +3,7 @@ kind: ResourceQuota
 metadata:
   name: devquota
   annotations:
-    configsync.gke.io/cluster-name-selector: my-dev
+    configsync.gke.io/cluster-name-selector: gkeacm-my-dev
 spec:
   hard:
     cpu: 700m
