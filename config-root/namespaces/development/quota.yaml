@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: devquota
+  namespace: development
   annotations:
     configsync.gke.io/cluster-name-selector: gkeacm-my-dev
 spec:
