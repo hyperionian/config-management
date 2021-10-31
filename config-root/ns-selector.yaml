@@ -1,0 +1,8 @@
+kind: NamespaceSelector
+apiVersion: configmanagement.gke.io/v1
+metadata:
+  name: ns-dev-selector
+spec:
+  selector:
+    matchLabels:
+      environment: development
