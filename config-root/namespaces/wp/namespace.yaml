@@ -4,3 +4,5 @@ metadata:
   name: wp
   annotations: 
     configsync.gke.io/cluster-name-selector: gkeacm-my-dev
+  labels:
+    environment: development
