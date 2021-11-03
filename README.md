@@ -35,7 +35,7 @@ The Terraform template will deploy 2 clusters (platform-admin and my-dev), enabl
 
 ## Config Sync
 
-The config sync will sync the clusters with the unstructured repo under /config-root directory for namespace configuration. Test the config sync by running 
+The config sync will sync the clusters with the unstructured repo under /config-root directory for namespace configuration. Test the config sync by running the following command
 
  ```bash
  kubectl get namespaces 
