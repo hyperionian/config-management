@@ -43,7 +43,7 @@ resource "google_cloudbuild_trigger" "app-deployment-trigger" {
       branch = var.branch_name
     }
 }
-  filename = "cloudbuild-dev.yaml"
+  filename = "app-deployment/cloudbuild-dev.yaml"
   depends_on = [
     google_project_iam_binding.cloud.build.iam.binding
   ]
