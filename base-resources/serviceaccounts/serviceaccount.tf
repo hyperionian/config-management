@@ -14,7 +14,7 @@ module "workload-identity" {
   source     = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
   name       = "sa-${var.clustername}"
   namespace  = "default"
-  project_id = var.project
+  project_id = var.project_id
   use_existing_k8s_sa = false
   roles      = ["roles/storage.admin", "roles/compute.admin"]
 }
