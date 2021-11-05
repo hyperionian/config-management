@@ -35,20 +35,21 @@ resource "google_project_iam_binding" "cloud-build-iam-binding" {
     module.enabled_google_apis
   ]
 }
+
 resource "google_cloudbuild_trigger" "app-deployment-trigger" {
+  provider = google-beta
   github {
     owner = var.github_owner
     name  = var.github_repository
     push {
       branch = var.branch_name
     }
-}
+  }
   filename = "app-deployment/cloudbuild-dev.yaml"
   depends_on = [
-    google_project_iam_binding.cloud.build.iam.binding
+    google_project_iam_binding.cloud-build-iam-binding
   ]
 }
-
 
 # Allows Cloud Build to commit to a user's Github account using a github token secret, 
 
@@ -56,7 +57,7 @@ resource "google_cloudbuild_trigger" "app-deployment-trigger" {
 #  project = var.project_id
 #  role    = "roles/secretmanager.secretAccessor"
 
- # members = [
-  #  "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com",
-  #]
+# members = [
+#  "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com",
+#]
 #}
