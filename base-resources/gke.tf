@@ -7,7 +7,7 @@ module "enabled_google_apis" {
   version = "~> 10.0"
 
   project_id                  = var.project_id
-  disable_services_on_destroy = false
+  disable_services_on_destroy = true
 
   activate_apis = [
     "compute.googleapis.com",
@@ -53,6 +53,9 @@ resource "google_container_cluster" "platform" {
       enabled = true
     }
   }
+  depends_on = [
+    module.enabled_google_apis
+  ]
 }
 
 # Platform Admin cluster - node pool 
@@ -103,7 +106,9 @@ resource "google_container_cluster" "dev" {
   workload_identity_config {
     identity_namespace = "${var.project_id}.svc.id.goog"
   }
-
+  depends_on = [
+    module.enabled_google_apis
+  ]
 }
 
 # Dev cluster node pool
@@ -144,6 +149,9 @@ resource "google_gke_hub_feature" "configmanagement_acm_feature" {
   name     = "configmanagement"
   location = "global"
   provider = google-beta
+  depends_on = [
+    module.enabled_google_apis
+  ]
 }
 
 # Set up GKE clusters for Config Management
