@@ -49,7 +49,7 @@ The Terraform code will deploy 2 clusters (platform-admin and my-dev), enable Wo
 
 ## Config Sync
 
-The config sync will sync the clusters with the Kubernetes objects defined in unstructured repo under /config-root directory of the repo for namespaces configuration, resource quota configuration, and sample wordpress app deployment . To check if the config sync has synced all the expected Kubernetes objects.
+The config sync will sync the clusters with the Kubernetes objects defined in under /config-root directory (unstructured repo) of the cloned repo for namespaces configuration, resource quota configuration, and sample wordpress app deployments. To check if the config sync has synced all the expected Kubernetes objects.
 
 1. Connect to the each cluster and check if the config sync has synced all the Kubernetes objects. Check the namespace creations.
 
@@ -66,7 +66,7 @@ The config sync will sync the clusters with the Kubernetes objects defined in un
    gcloud container clusters get-credentials my-dev --zone $ZONE_DEV --project $PROJECT_ID
    kubectl get namespace
    ```
- The Development namespace should be created in all custers, wp namespace is created in my-dev cluster, resource quota is created in both wp and development namespace, Wordpress pods and services are created in wp namespace
+ The Development namespace should be created in all custers, wp namespace is created in my-dev cluster, resource quota is created in both wp and development namespaces, Wordpress pods and services are created in wp namespace
 
 ## App Deployment
 
