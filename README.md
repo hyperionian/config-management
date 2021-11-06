@@ -1,10 +1,10 @@
 # Configure Config Sync and deploy container apps on GKE
 
-The example provided here is to demonstrate how to deploy 2 GKE clusters, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview), and crete Cloud Build trigger feature with [Terraform](https://www.terraform.io/)
+The example provided here is to demonstrate how to deploy 2 GKE clusters, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview), and craete Cloud Build trigger feature with [Terraform](https://www.terraform.io/)
 
-In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters
+In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters.
 
-## Deploying GKE Clusters, Config Sync, Policy Controller, and Cloud Build
+## Deploying GKE Clusters, enable Config Sync, Policy Controller, and configure Cloud Build
 
 The following steps are with the assumption that the Google Cloud Project and Billing Account for deploying Google Cloud resources have been setup accordingly. 
 
@@ -47,14 +47,14 @@ The Terraform code will deploy 2 clusters (platform-admin and my-dev), enable Wo
 
 ## Config Sync
 
-The config sync will sync the clusters with the objects defined in unstructured repo under /config-root directory for namespaces configuration, resource quota, and sample wordpress app deployment . To check if the config sync has sync all required objects.
+The config sync will sync the clusters with the Kubernetes objects defined in unstructured repo under /config-root directory of the repo for namespaces configuration, resource quota configuration, and sample wordpress app deployment . To check if the config sync has synced all the expected Kubernetes objects.
 
-1. Connect to the each cluster and check if the config sync has synced all the objects. Check the namespace creations.
+1. Connect to the each cluster and check if the config sync has synced all the Kubernetes objects. Check the namespace creations.
 
    ```bash
    ZONE_ADMIN=[Platform ADMIN Cluster Zone]
    ZONE_DEV=[My Dev Cluster Zone]
-   # Note that Platform ADMIN cluster zone is set to us-central1-f and My Dev cluster zone is set to us-east1-c in the Terraform template
+   # Note that Platform ADMIN cluster zone is set to us-central1-f and My Dev cluster zone is set to us-east1-c in the example Terraform code
 
    # Connecting to platform-admin cluster
    gcloud container clusters get-credentials platform-admin --zone $ZONE_ADMIN --project $PROJECT_ID
