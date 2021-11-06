@@ -1,6 +1,6 @@
-# Configure Config Sync and deploy container apps on GKE
+# Configure Config Sync and using Cloud Build to  deploy container apps on GKE
 
-The example provided here is to demonstrate how to deploy 2 GKE clusters, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview), and craete Cloud Build trigger feature with [Terraform](https://www.terraform.io/)
+The example provided here is to demonstrate how to deploy 2 GKE clusters, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview) on those GKE clusters, and craete Cloud Build trigger feature with [Terraform](https://www.terraform.io/)
 
 In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters.
 
@@ -8,28 +8,30 @@ In addition to that, the example also demonstrates on how to make use of Cloud B
 
 The following steps are with the assumption that the Google Cloud Project and Billing Account for deploying Google Cloud resources have been setup accordingly. 
 
-If you don't have Google Cloud project, get started [here](https://cloud.google.com/gcp/) for free
+If you don't have Google Cloud project, get started [here](https://cloud.google.com/gcp/) for free.
 
 ### Pre requisites
 
 In order to use the example described here, the following is required:
 
 1. Obtain your Google  Project ID and Project Number
-1. Create a Connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of trigger as it will be created by Terraform in this example 
+
+1. Create a connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of the trigger as it will be created by Terraform in this example 
 
 ###
 1. Clone this repo
    ```bash
    git clone https://github.com/hyperionian/config-management.git
    ```
-1. Copy and push the app-deployment/ directory to your own GitHub repo and obtain the github_owner, github_repository, and branch name details. These are required for creating Cloud Build trigger against your own repo.
+1. Copy and push the app-deployment/ directory to your own GitHub repo and obtain the following details from your GitHub repo. Github owner name (for example https://github.com/hyperionian, the owner is hyperionian), GitHub repo name, and branch name for triggering the build in Cloud Build.
+
 
 1. Set the Google Cloud project id and project number environment variable
    ```bash
     PROJECT_ID=[PROJECT_ID]
     PROJECT_NUMBER=[PROJECT_NUMBER]
     ```
-1. Deploy 2 GKE clusters and a Cloud Build trigger. Make necessary changes to the github_owner, github_repository, and branch_name obtained from your own repo in cloudbuild.tf
+1. Deploy 2 GKE clusters and a Cloud Build trigger. Make necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in cloudbuild.tf
 
     ```bash
     # Login with user account for terraform to use
