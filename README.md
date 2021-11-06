@@ -4,13 +4,11 @@ The example provided here is to demonstrate how to deploy 2 GKE clusters, enable
 
 In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters.
 
-## Deploying GKE Clusters, enable Config Sync, Policy Controller, and configure Cloud Build
-
 The following steps are with the assumption that the Google Cloud Project and Billing Account for deploying Google Cloud resources have been setup accordingly. 
 
 If you don't have Google Cloud project, get started [here](https://cloud.google.com/gcp/) for free.
 
-### Pre requisites
+## Pre requisites
 
 In order to use the example described here, the following is required:
 
@@ -18,7 +16,7 @@ In order to use the example described here, the following is required:
 
 1. Create a connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of the trigger as it will be created by Terraform in this example 
 
-### Deploying GKE Clusters and enabling Config Sync
+## Deploying GKE Clusters, enable Config Sync, Policy Controller, and configure Cloud Build
 1. Clone this repo
    ```bash
    git clone https://github.com/hyperionian/config-management.git
@@ -47,7 +45,7 @@ In order to use the example described here, the following is required:
     ```
 The Terraform code will deploy 2 clusters (platform-admin and my-dev), enable Workload Identity and  assigned with necessary IAM roles (Compute and Storage Admin), assign Cloud Build with required IAM roles for deploying container apps, enable Config Sync, and Policy Controller. It uses the new Terraform resources [google_gke_hub_feature](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature), [google_hub_feature_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature_membership), [google_gke_hub_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_membership)
 
-## Config Sync
+## GKE Config Sync
 
 The config sync will sync the clusters with the Kubernetes objects defined in under /config-root directory (unstructured repo) of the cloned repo for namespaces configuration, resource quota configuration, and sample wordpress app deployments. To check if the config sync has synced all the expected Kubernetes objects.
 
@@ -68,7 +66,7 @@ The config sync will sync the clusters with the Kubernetes objects defined in un
    ```
  The Development namespace should be created in all custers, wp namespace is created in my-dev cluster, resource quota is created in both wp and development namespaces, Wordpress pods and services are created in wp namespace
 
-## App Deployment
+## App Deployment using Cloud Build
 
 1. Make and push changes to your app repo , the Cloud Build will be triggered to deploy sample app to a GKE cluster with External Ingress. The sample app is based on the examples provided [here](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)
 
