@@ -7,5 +7,5 @@ metadata:
     configmanagement.gke.io/namespace-selector: ns-dev-selector
 spec:
   hard:
-    cpu: 700m
-    memory: 512Mi
+    cpu: "2"
+    memory: "2G"
