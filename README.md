@@ -68,7 +68,7 @@ The config sync will sync the clusters with the objects defined in unstructured 
 
 ## App Deployment
 
-1. Make and push changes to your app repo , the Cloud Build will be triggered to deploy sample app to a GKE cluster
+1. Make and push changes to your app repo , the Cloud Build will be triggered to deploy sample app to a GKE cluster with External Ingress. The sample app is based on the examples provided [here](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)
 
 1. Test the sample app
    ```bash
