@@ -3,6 +3,6 @@ kind: Namespace
 metadata:
   name: wp
   annotations: 
-    configsync.gke.io/cluster-name-selector: gkeacm-my-dev
+    configsync.gke.io/cluster-name-selector: my-dev
   labels:
     environment: development
