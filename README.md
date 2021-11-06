@@ -77,4 +77,8 @@ The config sync will sync the clusters with the Kubernetes objects defined in un
    The output shows the IP address of the HTTPS external Load Balancer. Test against / path by running 
    ```bash
    curl loadbalancerip
+   # It should return "Hello, world!"
+   curl loadbalancerip/kube
+   # It should return "Hello Kubernetes!"
+
    ```
