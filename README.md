@@ -21,7 +21,7 @@ In order to use the example described here, the following is required:
    ```bash
    git clone https://github.com/hyperionian/config-management.git
    ```
-1. Copy and push the app-deployment/ directory to your own GitHub repo and obtain the following details from your GitHub repo. Github owner name (for example https://github.com/hyperionian, the owner is hyperionian), GitHub repo name, and branch name for triggering the build in Cloud Build.
+1. Copy and push the app-deployment/ and optionally config-root/ directory to your own GitHub repo and obtain the following details from your GitHub repo. Github owner name (for example https://github.com/hyperionian, the owner is hyperionian), GitHub repo name, and branch name for triggering the build in Cloud Build.
 
 
 1. Set the Google Cloud project id and project number environment variable
@@ -29,7 +29,7 @@ In order to use the example described here, the following is required:
     PROJECT_ID=[PROJECT_ID]
     PROJECT_NUMBER=[PROJECT_NUMBER]
     ```
-1. Deploy 2 GKE clusters and a Cloud Build trigger. Make necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in cloudbuild.tf
+1.  Make the necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in cloudbuild.tf. Deploy 2 GKE clusters and a Cloud Build trigger. Optionally, you can update the sync_repo, sync_branch, and policy_dir in gke.tf to point to your own config sync repo. 
 
     ```bash
     # Login with user account for terraform to use
@@ -47,7 +47,7 @@ The Terraform code will deploy 2 clusters (platform-admin and my-dev), enable Wo
 
 ## GKE Config Sync
 
-The config sync will sync the clusters with the Kubernetes objects defined in under /config-root directory (unstructured repo) of the cloned repo for namespaces configuration, resource quota configuration, and sample wordpress app deployments. To check if the config sync has synced all the expected Kubernetes objects.
+The config sync will sync the clusters with the Kubernetes objects defined in under /config-root directory (unstructured repo) of the cloned repo for namespaces configuration, resource quota configuration, and sample wordpress app deployments. To check if the config sync has synced all the configured Kubernetes objects.
 
 1. Connect to the each cluster and check if the config sync has synced all the Kubernetes objects. Check the namespace creations.
 
@@ -68,7 +68,7 @@ The config sync will sync the clusters with the Kubernetes objects defined in un
 
 ## App Deployment using Cloud Build
 
-1. Make and push changes to your app repo , the Cloud Build will be triggered to deploy sample app to a GKE cluster with External Ingress. The sample app is based on the examples provided [here](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)
+1. Make and push changes to your app repo created earlier based on app-deployment/ directory, it will be trigger a build in Cloud Build to deploy sample apps to a GKE cluster with External Ingress. The sample app is based on the examples provided [here](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)
 
 1. Test the sample app. Make sure that you are the in the right kubeconfig context for my-dev cluster.
    ```bash
