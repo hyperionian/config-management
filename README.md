@@ -70,9 +70,9 @@ The config sync will sync the clusters with the Kubernetes objects defined in un
 
 1. Make and push changes to your app repo , the Cloud Build will be triggered to deploy sample app to a GKE cluster with External Ingress. The sample app is based on the examples provided [here](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)
 
-1. Test the sample app
+1. Test the sample app. Make sure that you are the in the right kubeconfig context for my-dev cluster.
    ```bash
-   kubectl get ingress my-ingress --output yaml
+   kubectl get ingress my-ingress --output yaml -n development
    ```
    The output shows the IP address of the HTTPS external Load Balancer. Test against / path by running 
    ```bash
