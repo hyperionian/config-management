@@ -4,7 +4,8 @@ The example provided here is to demonstrate how to deploy 2 GKE clusters, enable
 
 In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters
 
-## Deploy 2 GKE Clusters using Terraform 
+## Deploying GKE Clusters, Config Sync, Policy Controller, and Cloud Build
+
 The following steps are with the assumption that the Google Cloud Project and Billing Account for deploying Google Cloud resources have been setup accordingly. 
 
 If you don't have Google Cloud project, get started [here](https://cloud.google.com/gcp/) for free
@@ -14,9 +15,9 @@ If you don't have Google Cloud project, get started [here](https://cloud.google.
 In order to use the example described here, the following is required:
 
 1. Obtain your Google  Project ID and Project Number
-1. Create a Connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of trigger as it will be created by Terraform in this example
-1. 
+1. Create a Connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of trigger as it will be created by Terraform in this example 
 
+###
 1. Clone this repo
    ```bash
    git clone https://github.com/hyperionian/config-management.git
@@ -42,7 +43,7 @@ In order to use the example described here, the following is required:
     terraform plan
     terraform apply
     ```
-The Terraform template will deploy 2 clusters (platform-admin and my-dev), enable Workload Identity and  assigned with necessary IAM roles (Compute and Storage Admin), assign Cloud Build with required IAM roles for deploying container apps, enable Config Sync, and Policy Controller. It uses the new Terraform resources [google_gke_hub_feature](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature), [google_hub_feature_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature_membership), [google_gke_hub_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_membership)
+The Terraform code will deploy 2 clusters (platform-admin and my-dev), enable Workload Identity and  assigned with necessary IAM roles (Compute and Storage Admin), assign Cloud Build with required IAM roles for deploying container apps, enable Config Sync, and Policy Controller. It uses the new Terraform resources [google_gke_hub_feature](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature), [google_hub_feature_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature_membership), [google_gke_hub_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_membership)
 
 ## Config Sync
 
