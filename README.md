@@ -18,7 +18,7 @@ In order to use the example described here, the following is required:
 
 1. Create a connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of the trigger as it will be created by Terraform in this example 
 
-###
+### Deploying GKE Clusters and enabling Config Sync
 1. Clone this repo
    ```bash
    git clone https://github.com/hyperionian/config-management.git
