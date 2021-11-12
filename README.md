@@ -1,6 +1,6 @@
 # Configure Config Sync and using Cloud Build to  deploy container apps on GKE
 
-The example provided here is to demonstrate how to deploy 2 GKE clusters, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview) on those GKE clusters, and craete [Cloud Build](https://cloud.google.com/build) trigger feature with [Terraform](https://www.terraform.io/)
+The example provided here is to demonstrate how to deploy 2 GKE VPC-native clusters on default VPC network, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview) on those GKE clusters, and craete [Cloud Build](https://cloud.google.com/build) trigger feature with [Terraform](https://www.terraform.io/)
 
 In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters.
 
