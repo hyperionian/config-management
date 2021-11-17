@@ -2,10 +2,6 @@
 
 # Assign Cloud Build's service account permissions to deploy to GKE ("Kubernetes Engine Developer" role)
 
-variable "project_number" {
-  type        = string
-  description = "the project number"
-}
 variable "github_owner" {
   description = "Name of the GitHub Repository Owner."
   type        = string
@@ -24,12 +20,16 @@ variable "branch_name" {
   default     = "main"
 }
 
+data "google_project" "project_number" {
+  project_id = var.project_id
+}
+
 resource "google_project_iam_binding" "cloud-build-iam-binding" {
   project = var.project_id
   role    = "roles/container.developer"
 
   members = [
-    "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com",
+    "serviceAccount:${data.google_project.project_number.number}@cloudbuild.gserviceaccount.com",
   ]
   depends_on = [
     module.enabled_google_apis
