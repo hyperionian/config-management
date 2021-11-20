@@ -44,4 +44,10 @@ steps:
       terraform init
       terraform apply \
       --auto-approve \
-      "${_BASE_DIR}/tfplan_{BUILD_ID}.yaml" || exit 1 
+      "${_BASE_DIR}/tfplan_{BUILD_ID}.yaml" || exit 1
+
+
+artifacts:
+  objects:
+    location: 'gs://${_ARTIFACT_BUCKET_NAME}/terraform/cloudbuild/plan/${BUILD_ID}'
+    paths: ['cb-tf-plan.yaml', '${_BASE_DIR}/tfplan_{BUILD_ID}.yaml']
