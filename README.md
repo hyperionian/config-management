@@ -14,6 +14,8 @@ In order to use the example described here, the following is required:
 
 1. Obtain your Google  Project ID and Project Number
 
+1. Create a VPC network (default network) in your project. You can use this [module](https://github.com/terraform-google-modules/terraform-google-network) to create a VPC network
+
 1. Create a connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of the trigger as it will be created by Terraform in this example 
 
 ## Deploying GKE Clusters, enable Config Sync, Policy Controller, and configure Cloud Build
@@ -27,7 +29,6 @@ In order to use the example described here, the following is required:
 1. Set the Google Cloud project id and project number environment variable
    ```bash
     PROJECT_ID=[PROJECT_ID]
-    PROJECT_NUMBER=[PROJECT_NUMBER]
     ```
 1.  Make the necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in cloudbuild.tf. Deploy 2 GKE clusters and a Cloud Build trigger. Optionally, you can update the sync_repo, sync_branch, and policy_dir in gke.tf to point to your own config sync repo. 
 
