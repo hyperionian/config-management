@@ -1,6 +1,6 @@
 # Configure Config Sync and using Cloud Build to  deploy container apps on GKE
 
-The example provided here is to demonstrate how to deploy 2 GKE VPC-native clusters on default VPC network, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview) on those GKE clusters, and craete [Cloud Build](https://cloud.google.com/build) trigger feature with [Terraform](https://www.terraform.io/)
+The example provided here is to demonstrate how to deploy 2 GKE VPC-native clusters on default VPC network, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview) on those GKE clusters, and create [Cloud Build](https://cloud.google.com/build) trigger feature with [Terraform](https://www.terraform.io/)
 
 In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters.
 
@@ -16,21 +16,21 @@ In order to use the example described here, the following is required:
 
 1. Create a VPC network (default network) in your project. You can use this [module](https://github.com/terraform-google-modules/terraform-google-network) to create a VPC network
 
-1. Create a connection to your GitHub repo in Cloud Build, you can setup the GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of the trigger as it will be created by Terraform in this example 
+1. Create a new GitHub repo and a connection to your own GitHub repo in Cloud Build, you can setup the new GitHub repo connection using this [guide](https://cloud.google.com/build/docs/automating-builds/build-repos-from-github#installing_gcb_app) and skip the creation of the trigger as it will be created by Terraform in this example 
 
 ## Deploying GKE Clusters, enable Config Sync, Policy Controller, and configure Cloud Build
 1. Clone this repo
    ```bash
    git clone https://github.com/hyperionian/config-management.git
    ```
-1. Copy and push the app-deployment/ and optionally config-root/ directory to your own GitHub repo and obtain the following details from your GitHub repo. Github owner name (for example https://github.com/hyperionian, the owner is hyperionian), GitHub repo name, and branch name for triggering the build in Cloud Build.
+1. Copy and push the app-deployment/ and optionally config-root/ directory (config sync repo) to your own GitHub repo and obtain the following details from your GitHub repo. Github owner name (for example https://github.com/hyperionian, the owner is hyperionian), GitHub repo name, and branch name for triggering the build in Cloud Build.
 
 
 1. Set the Google Cloud project id and project number environment variable
    ```bash
     PROJECT_ID=[PROJECT_ID]
     ```
-1.  Make the necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in cloudbuild.tf. Deploy 2 GKE clusters and a Cloud Build trigger. Optionally, you can update the sync_repo, sync_branch, and policy_dir in gke.tf to point to your own config sync repo. 
+1.  Make the necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in cloudbuild.tf file. Deploy 2 GKE clusters and a Cloud Build trigger. Optionally, you can update the sync_repo, sync_branch, and policy_dir in gke.tf file to point to your own config sync repo.
 
     ```bash
     # Login with user account for terraform to use
