@@ -56,6 +56,9 @@ resource "google_container_cluster" "platform" {
   depends_on = [
     module.enabled_google_apis
   ]
+  timeouts {
+    create = "60m"
+  }
 }
 
 # Platform Admin cluster - node pool 
@@ -106,9 +109,13 @@ resource "google_container_cluster" "dev" {
   workload_identity_config {
     identity_namespace = "${var.project_id}.svc.id.goog"
   }
+  
   depends_on = [
     module.enabled_google_apis
   ]
+  timeouts {
+    create = "60m"
+  }
 }
 
 # Dev cluster node pool
@@ -159,7 +166,7 @@ resource "google_gke_hub_feature" "configmanagement_acm_feature" {
 module "gkeacm" {
   source        = "./acm-gke"
   membership_id = google_container_cluster.platform.name
-  sync_repo     = "https://github.com/hyperionian/config-management"
+  sync_repo     = "https://github.com/hyperionian/config-sync-gke"
   sync_branch   = "main"
   policy_dir    = "config-root"
   resource_link = "//container.googleapis.com/${google_container_cluster.platform.id}"
@@ -172,7 +179,7 @@ module "gkeacm" {
 module "gkeacm_dev" {
   source        = "./acm-gke"
   membership_id = google_container_cluster.dev.name
-  sync_repo     = "https://github.com/hyperionian/config-management"
+  sync_repo     = "https://github.com/hyperionian/config-sync-gke"
   sync_branch   = "main"
   policy_dir    = "config-root"
   resource_link = "//container.googleapis.com/${google_container_cluster.dev.id}"
