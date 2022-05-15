@@ -1,6 +1,6 @@
 # Configure Config Sync and using Cloud Build to  deploy container apps on GKE
 
-The example provided here is to demonstrate how to deploy 2 GKE VPC-native clusters on default VPC network, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview) on those GKE clusters, and create [Cloud Build](https://cloud.google.com/build) trigger feature with [Terraform](https://www.terraform.io/)
+The example provided here is to demonstrate how to deploy 2 GKE VPC-native clusters on default VPC network, enable ACM [Config Sync](https://cloud.google.com/anthos-config-management/docs/config-sync-overview) on those GKE clusters, and create [Cloud Build](https://cloud.google.com/build) trigger with [Terraform](https://www.terraform.io/)
 
 In addition to that, the example also demonstrates on how to make use of Cloud Build to deploy sample container apps to one of the Clusters.
 
@@ -12,7 +12,7 @@ If you don't have Google Cloud project, get started [here](https://cloud.google.
 
 In order to use the example described here, the following is required:
 
-1. Obtain your Google  Project ID and Project Number
+1. Obtain your Google  Project ID
 
 1. Create a VPC network (default network) in your project. You can use this [module](https://github.com/terraform-google-modules/terraform-google-network) to create a VPC network
 
@@ -30,7 +30,7 @@ In order to use the example described here, the following is required:
    ```bash
     PROJECT_ID=[PROJECT_ID]
     ```
-1.  Make the necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in cloudbuild.tf file. Deploy 2 GKE clusters and a Cloud Build trigger. Optionally, you can update the sync_repo, sync_branch, and policy_dir in gke.tf file to point to your own config sync repo.
+1.  Make the necessary changes to the github_owner (Github owner name), github_repository (GitHub repo name), and branch_name (GitHub branch name) obtained from your own repo in the cloudbuild.tf file. Deploy 2 GKE clusters and a Cloud Build trigger. Optionally, you can update the sync_repo, sync_branch, and policy_dir in gke.tf file to point to your own config sync repo.
 
     ```bash
     # Login with user account for terraform to use
@@ -39,11 +39,12 @@ In order to use the example described here, the following is required:
     # Make sure you are in base-resources directory
     cd base-resources
     export TF_VAR_project_id=$PROJECT_ID
-    export TF_VAR_project_number=$PROJECT_NUMBER
     terraform init
     terraform plan
     terraform apply
     ```
+    Alternatively, you can instantiate the project_id variable in terraform.tfvars file. See terraform.tfvars.example for more details.
+
 The Terraform code will deploy 2 clusters (platform-admin and my-dev), enable Workload Identity and  assigned with necessary IAM roles (Compute and Storage Admin), assign Cloud Build with required IAM roles for deploying container apps, enable Config Sync, and Policy Controller. It uses the new Terraform resources [google_gke_hub_feature](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature), [google_hub_feature_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_feature_membership), [google_gke_hub_membership](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/gke_hub_membership)
 
 ## GKE Config Sync
